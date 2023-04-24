@@ -34,6 +34,17 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+
+    // Updates a user
+    async updateUser(req, res) {
+        try {
+            const user = await User.findOneAndUpdate(req.body);
+            res.json(user);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
+
     // Delete a user and associated thoughts
     async deleteUser(req, res) {
         try {
