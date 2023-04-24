@@ -2,10 +2,6 @@ const { Schema, Types } = require('mongoose');
 
 const ThoughtSchema = new Schema(
     {
-        thoughtID: {
-            type: Schema.Types.ObjectId,
-            default: () => new Types.ObjectId()
-        },
         thoughtText: {
             type: String,
             required: true,
