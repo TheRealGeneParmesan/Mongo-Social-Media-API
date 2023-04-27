@@ -6,10 +6,8 @@ module.exports = {
     async getThoughts(req, res) {
         try {
             const thoughts = await Thought.find();
-            console.log(thoughts)
             res.json(thoughts);
         } catch (err) {
-            console.log(err);
             res.status(500).json(err);
         }
     },
@@ -45,7 +43,6 @@ module.exports = {
             }
             res.json('Created thought successfully');
         } catch (err) {
-            console.log(err);
             res.status(500).json(err);
         }
     },
@@ -65,7 +62,6 @@ module.exports = {
 
             res.json(thought);
         } catch (err) {
-            console.log(err)
             res.status(500).json(err);
         }
     },

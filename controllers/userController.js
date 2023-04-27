@@ -38,7 +38,11 @@ module.exports = {
     // Updates a user
     async updateUser(req, res) {
         try {
-            const user = await User.findOneAndUpdate(req.body);
+            const user = await User.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $set: req.body },
+                { new: true, runValidators: true }
+            );
             res.json(user);
         } catch (err) {
             res.status(500).json(err);
@@ -48,7 +52,7 @@ module.exports = {
     // Delete a user and associated thoughts
     async deleteUser(req, res) {
         try {
-            const user = await User.findOneAndDelete({ _id: req.params.userId });
+            const user = await User.deleteMany({ _id: req.params.userId });
 
             if (!user) {
                 return res.status(404).json({ message: 'No user with that ID' });
