@@ -4,7 +4,7 @@ module.exports = {
     // Get all users
     async getUsers(req, res) {
         try {
-            const users = await User.find();
+            const users = await User.find().populate('thoughts').populate('friends');
             res.json(users);
         } catch (err) {
             res.status(500).json(err);
@@ -13,7 +13,7 @@ module.exports = {
     // Get a single user
     async getSingleUser(req, res) {
         try {
-            const user = await User.findOne({ _id: req.params.userId })
+            const user = await User.findOne({ _id: req.params.userId }).populate('thoughts').populate('friends')
                 .select('-__v');
 
             if (!user) {
