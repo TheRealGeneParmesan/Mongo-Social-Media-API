@@ -1,6 +1,6 @@
 const { Schema, Types } = require('mongoose');
 
-const Reaction = new Schema(
+const reactionSchema = new Schema(
     {
         reactionId: {
             type: Schema.Types.ObjectId,
@@ -18,9 +18,15 @@ const Reaction = new Schema(
         createdAt: {
             type: Date,
             default: Date.now,
-            get: (createdAtVal) => dateFormat(createdAtVal)
+            get: (createdAtVal) => createdAtVal.toLocaleDateString()
         }
-
+    },
+    {
+        toJSON: {
+            virtuals: true,
+            getters: true
+        },
+        id: false,
     });
 
-module.exports = Reaction
+module.exports = reactionSchema;
