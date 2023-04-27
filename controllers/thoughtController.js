@@ -6,8 +6,10 @@ module.exports = {
     async getThoughts(req, res) {
         try {
             const thoughts = await Thought.find();
+            console.log(thoughts)
             res.json(thoughts);
         } catch (err) {
+            console.log(err);
             res.status(500).json(err);
         }
     },
@@ -101,13 +103,15 @@ module.exports = {
                 { $addToSet: { reactions: req.body } },
                 { runValidators: true, new: true }
             );
+            console.log(thought)
 
-            if (thought) {
+            if (!thought) {
                 return res.status(404).json({ message: 'No thought with that ID' });
             }
 
             res.json(thought);
         } catch (err) {
+            console.log(err)
             res.status(500).json(err);
         }
     },
